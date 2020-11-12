@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TrayIconAppExample.Properties;
 
 namespace TrayIconAppExample
 {
@@ -16,7 +17,16 @@ namespace TrayIconAppExample
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            try
+            {
+                var applicationContext = new TrayIconContext();
+                Application.Run(applicationContext);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, Resources.MAIN_UNKNOW_EXCEPTION,
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }
